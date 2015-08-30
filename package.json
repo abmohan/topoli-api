@@ -1,0 +1,58 @@
+{
+  "name": "topoli",
+  "version": "0.0.1",
+  "description": "Visualizing Toronto's political data",
+  "main": "server/index.js",
+  "scripts": {
+    "postinstall": "node server/bin/load.js",
+    "start": "node server/index.js"
+  },
+  "engines": {
+    "iojs": "2.5.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abmohan/topoli-api"
+  },
+  "keywords": [
+    "toronto",
+    "political",
+    "data",
+    "map",
+    "geo",
+    "canada"
+  ],
+  "author": "Ashwin Balamohan <abmohan@gmail.com>",
+  "contributors": [
+    {
+      "name": "Ashwin Balamohan",
+      "email": "abmohan@gmail.com"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abmohan/topoli-api/issues"
+  },
+  "homepage": "https://github.com/abmohan/topoli-api",
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "csv": "^0.4.6",
+    "express": "^4.13.3",
+    "mongoose": "^4.1.3",
+    "mongoose-schema-extend": "^0.1.7",
+    "morgan": "^1.6.1",
+    "node-libs-browser": "^0.5.2",
+    "node-sass": "^3.3.1",
+    "ramda": "^0.17.1",
+    "shapefile": "^0.3.0",
+    "xlsx": "^0.8.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-batch": "^1.0.5",
+    "gulp-eslint": "^1.0.0",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-watch": "^4.3.5",
+    "require-dir": "^0.3.0"
+  }
+}
