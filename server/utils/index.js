@@ -8,9 +8,12 @@ exports.removeUndefinedProps = function removeUndefinedProps(obj) {
 
   return R.reduce(
     function objKeyReducer(reducedObj, key) {
-      if (obj[key]) {
+
+      // include all fields not equal to 'undefined'
+      if (obj[key] !== undefined) {
         reducedObj[key] = obj[key];
       }
+
       return reducedObj;
     },
     {},
