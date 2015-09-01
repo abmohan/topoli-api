@@ -11,48 +11,48 @@ exports.find = function find(req, res) {
     'year': parseInt(req.query.year) || undefined
   });
 
-  MicroEntity.aggregate([
-    {
-      $project: {
-        jurisdiction: '$properties.jurisdiction',
-        results: '$properties.results',
-        _id: 0
-      }
-    },
-    {
-      $unwind: '$results'
-    },
-    {
-      $project: {
-        jurisdiction: '$jurisdiction',
-        office: '$results.office',
-        year: '$results.year'
-      }
-    },
-    {
-      $match: searchCriteria
-    },
-    {
-      $group: {
-        _id: {
-          office: '$office',
+  return MicroEntity.aggregate([
+      {
+        $project: {
+          jurisdiction: '$properties.jurisdiction',
+          results: '$properties.results',
+          _id: 0
+        }
+      },
+      {
+        $unwind: '$results'
+      },
+      {
+        $project: {
           jurisdiction: '$jurisdiction',
-          year: '$year'
+          office: '$results.office',
+          year: '$results.year'
+        }
+      },
+      {
+        $match: searchCriteria
+      },
+      {
+        $group: {
+          _id: {
+            office: '$office',
+            jurisdiction: '$jurisdiction',
+            year: '$year'
+          }
+        }
+      },
+      {
+        $project: {
+          office: '$_id.office',
+          jurisdiction: '$_id.jurisdiction',
+          year: '$_id.year',
+          _id: 0
         }
       }
-    },
-    {
-      $project: {
-        office: '$_id.office',
-        jurisdiction: '$_id.jurisdiction',
-        year: '$_id.year',
-        _id: 0
-      }
-    }
-  ])
-  .exec()
-  .then(function (results) {
-    res.send(results);
-  });
+    ])
+    .exec()
+    .then(function (results) {
+      return res.send(results);
+    });
 
 };

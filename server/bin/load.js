@@ -166,23 +166,7 @@ function performDBupdate(microEntities, macroEntities) {
     .then(function (query) {
       console.log('Documents removed:', query.result);
       console.log('\nInserting', macroEntities.length,'macroEntity documents');
-
-      return bluebird.each(macroEntities, function (macroEntity) {
-        process.stdout.write('\tMatching microentities for ' +
-          macroEntity.properties.entity + ' ' +
-          macroEntity.properties.name
-          );
-
-        return MicroEntity.getGeoIntersectionsAsync(macroEntity.geometry)
-          .then(function (microEntities) {
-            console.log(' - ', microEntities.length, 'entities added');
-            macroEntity.properties.microEntities = microEntities;
-          });
-      })
-      .then(function (macroEntities) {
-        return MacroEntity.bulkInsertAsync(macroEntities);
-      });
-
+      return MacroEntity.bulkInsertAsync(macroEntities);
     })
     .then(function () {
       console.log('Insert success!');
